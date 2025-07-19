@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 # if the buildpack is included, then assume it's meant to be run
-echo "Xlsx2csv fix buildpack detected"
+echo "Xlsx2csv fix"
 exit 0
