@@ -29,12 +29,6 @@ function indent() {
   esac
 }
 
-if [ "$STACK" != "heroku-24" ]; then
-  echo "Stack is not heroku-24, this fix is applicable for heroku-24 only." | indent
-  echo "...end of shebang fix." | indent
-  exit 0
-fi
-
 # Get data from PYTHONPATH_ENV config var if present
 if [ -f $ENV_DIR/PYTHONPATH_ENV ]; then
   export "PYTHONPATH=$(cat $ENV_DIR/PYTHONPATH_ENV)"
