@@ -11,6 +11,8 @@ You can initially install the Xlsx2csv package into your application by using he
 This buildpack applies a fix to shebang line in xlsx2csv.py file.
 
 Currently this fix is only applicable to Heroku-24 stack.
+To ommit this limitation, please use 
+https://github.com/velizarn/heroku-buildpack-xlsx2csv-fix#allstacks branch instead.
 
 ## Example
 
