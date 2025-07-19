@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir> <env-dir>
+
+# fail fast
+set -e
+
+# debug
+# set -x
+
+# parse and derive params
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+function error() {
+  echo " !     $*" >&2
+  exit 1
+}
+
+function topic() {
+  echo "-----> $*"
+}
+
+function indent() {
+  c='s/^/       /'
+  case $(uname) in
+    Darwin) sed -l "$c";;
+    *)      sed -u "$c";;
+  esac
+}
+
+if [ "$STACK" != "heroku-24" ]; then
+  echo "Stack is not heroku-24, this fix is applicable for heroku-24 only." | indent
+  echo "...end of shebang fix." | indent
+  exit 0
+fi
+
+# Get data from PYTHONPATH_ENV config var if present
+if [ -f $ENV_DIR/PYTHONPATH_ENV ]; then
+  export "PYTHONPATH=$(cat $ENV_DIR/PYTHONPATH_ENV)"
+else
+  PYTHONPATH=$"#!/usr/bin/python3"
+fi
+
+# Get data from XLSXFILEPATH_ENV config var if present
+if [ -f $ENV_DIR/XLSXFILEPATH_ENV ]; then
+  export "XLSXFILEPATH=$(cat $ENV_DIR/XLSXFILEPATH_ENV)"
+else
+  XLSXFILEPATH=$"/app/.apt/usr/share/xlsx2csv/xlsx2csv.py"
+fi
+
+# Adapt file path to the build directory
+XLSXFILEPATH=${XLSXFILEPATH/\/app/$BUILD_DIR}
+
+# Get actual local python path
+LOCALPYTHONPATH="$(which python)"
+
+echo "Local Python path: $LOCALPYTHONPATH" | indent
+
+echo "Fixing xlsx2csv.py shebang line to use local python" | indent
+
+test -f "$XLSXFILEPATH" && sed -i.bak '1s,'"$PYTHONPATH"',#!'"$LOCALPYTHONPATH"',' "$XLSXFILEPATH" || error "xlsx2csv.py file not found."
+
+echo "...end of shebang fix." | indent
