@@ -33,8 +33,8 @@ Python versions / Heroku stacks
 <table>
   <tr>
     <th>Python version</th>
-    <th>Heroku-22</th>
-    <th>Heroku-24</th>
+    <th>Heroku-22 *</th>
+    <th>Heroku-24 **</th>
   </tr>
   <tr>
     <td>3.12.x</td>
@@ -57,6 +57,8 @@ Python versions / Heroku stacks
     <td>?</td>
   </tr>
 </table>
+<sub>* Fix not needed if built-in Python installation is used<br />
+** The system Python installation in the base image is now only available at build time, and not also at app run time, you must add the Python buildpack to your app</sub>
 
 ## License
 
