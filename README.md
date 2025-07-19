@@ -28,6 +28,36 @@ this buildpack will change it based on actual python location e.g.:
 /app/.heroku/python/bin/python
 ```
 
+Python versions / Heroku stacks
+
+<table>
+  <tr>
+    <th>Python version</th>
+    <th>Heroku-22</th>
+    <th>Heroku-24</th>
+  </tr>
+  <tr>
+    <td>3.12.x</td>
+    <td>fix to be applied</td>
+    <td>fix to be applied</td>
+  </tr>
+  <tr>
+    <td>3.11.x</td>
+    <td>fix to be applied</td>
+    <td>fix to be applied</td>
+  </tr>
+  <tr>
+    <td>3.10.x</td>
+    <td><i>fix not needed</i></td>
+    <td>fix to be applied</td>
+  </tr>
+  <tr>
+    <td>3.9.x</td>
+    <td>?</td>
+    <td>?</td>
+  </tr>
+</table>
+
 ## License
 
 MIT
