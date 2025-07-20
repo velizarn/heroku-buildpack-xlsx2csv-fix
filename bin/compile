@@ -30,7 +30,7 @@ function indent() {
 }
 
 if [ "$STACK" != "heroku-24" ]; then
-  echo "Stack is not heroku-24, this fix is applicable for heroku-24 only." | indent
+  echo "This fix is applicable for heroku-24 only, stack $STACK detected" | indent
   echo "...end of shebang fix." | indent
   exit 0
 fi
